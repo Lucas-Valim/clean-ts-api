@@ -21,7 +21,7 @@ export default [
   { ignores: ['.config/*', '!node_modules/'] },
   {
     rules: {
-      '@typescript-eslint/strict-boolean-expressions': off
+      '@typescript-eslint/strict-boolean-expressions': 'off'
     }
   },
   { languageOptions: { globals: globals.browser } },
