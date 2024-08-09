@@ -19,12 +19,12 @@ let a
 export default [
   { files: ['**/*.js'], languageOptions: { sourceType: 'script' } },
   { ignores: ['.config/*', '!node_modules/'] },
+  { languageOptions: { globals: globals.browser } },
+  ...tseslint.configs.recommended,
+  ...compat.extends('love'),
   {
     rules: {
       '@typescript-eslint/strict-boolean-expressions': 'off'
     }
-  },
-  { languageOptions: { globals: globals.browser } },
-  ...tseslint.configs.recommended,
-  ...compat.extends('love')
+  }
 ]
