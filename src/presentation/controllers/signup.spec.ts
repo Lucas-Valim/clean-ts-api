@@ -122,7 +122,9 @@ describe('SingUpController', () => {
 
   test('Should return 500 if EmailValidator throws', () => {
     const { sut, emailValidatorStub } = makeSut()
-    emailValidatorStub.isValid = jest.fn(() => { throw new Error() })
+    jest.spyOn(emailValidatorStub, 'isValid').mockImplementationOnce(() => {
+      throw new Error()
+    })
 
     const httpRequest = {
       body: {
@@ -132,7 +134,6 @@ describe('SingUpController', () => {
         password_confirmation: 'any_password'
       }
     }
-
     const response = sut.handle(httpRequest)
 
     expect(response.statusCode).toEqual(500)
