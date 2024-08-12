@@ -16,12 +16,20 @@ export class SingUpController implements Controller {
           return badRequest(new MissingParamError(field))
         }
       }
+
+      if (httpRequest.body.password !== httpRequest.body.password_confirmation) {
+        return badRequest(new InvalidParamError('password_confirmation'))
+      }
+
+      // gambiarra p/ aceitar httpRequest.body tipo any
       let email: string = ''
       email = httpRequest.body.email
+      //
       const isEmailValid = this.emailValidator.isValid(email)
       if (!isEmailValid) {
         return badRequest(new InvalidParamError('email'))
       }
+
       return {
         statusCode: 200,
         body: {}
