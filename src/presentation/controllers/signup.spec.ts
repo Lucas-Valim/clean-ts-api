@@ -32,7 +32,7 @@ describe('SingUpController', () => {
       body: {
         emai: 'any_email@mail.com',
         password: 'any_password',
-        password_confirmation: 'any_password'
+        passwordConfirmation: 'any_password'
       }
     }
     const httpResponse = sut.handle(httpRequest)
@@ -46,7 +46,7 @@ describe('SingUpController', () => {
       body: {
         name: 'any_name',
         password: 'any_password',
-        password_confirmation: 'any_password'
+        passwordConfirmation: 'any_password'
       }
     }
     const httpResponse = sut.handle(httpRequest)
@@ -59,14 +59,14 @@ describe('SingUpController', () => {
     const httpRequest = {
       body: {
         name: 'any_name',
-        emai: 'any_email@mail.com',
-        password_confirmation: 'any_password'
+        email: 'any_email@mail.com',
+        passwordConfirmation: 'any_password'
       }
     }
     const httpResponse = sut.handle(httpRequest)
 
     expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.body).toEqual(new MissingParamError('email'))
+    expect(httpResponse.body).toEqual(new MissingParamError('password'))
   })
 
   test('Should return 400 if no password confirmation is provided ', () => {
@@ -81,7 +81,7 @@ describe('SingUpController', () => {
     const httpResponse = sut.handle(httpRequest)
 
     expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.body).toEqual(new MissingParamError('password_confirmation'))
+    expect(httpResponse.body).toEqual(new MissingParamError('passwordConfirmation'))
   })
 
   test('Should return 400 if an invalid email is provided ', () => {
@@ -93,7 +93,7 @@ describe('SingUpController', () => {
         name: 'any_name',
         email: 'invalid_email@mail.com',
         password: 'any_password',
-        password_confirmation: 'any_password'
+        passwordConfirmation: 'any_password'
       }
     }
     const httpResponse = sut.handle(httpRequest)
@@ -110,13 +110,13 @@ describe('SingUpController', () => {
         name: 'any_name',
         email: 'any_email@mail.com',
         password: 'any_password',
-        password_confirmation: 'invalid_password'
+        passwordConfirmation: 'invalid_password'
       }
     }
     const httpResponse = sut.handle(httpRequest)
 
     expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.body).toEqual(new InvalidParamError('password_confirmation'))
+    expect(httpResponse.body).toEqual(new InvalidParamError('passwordConfirmation'))
   })
 
   test('Should call EmailValidator with correct email ', () => {
@@ -128,7 +128,7 @@ describe('SingUpController', () => {
         name: 'any_name',
         email: 'any_email@mail.com',
         password: 'any_password',
-        password_confirmation: 'any_password'
+        passwordConfirmation: 'any_password'
       }
     }
 
@@ -148,7 +148,7 @@ describe('SingUpController', () => {
         name: 'any_name',
         email: 'any_email@mail.com',
         password: 'any_password',
-        password_confirmation: 'any_password'
+        passwordConfirmation: 'any_password'
       }
     }
     const response = sut.handle(httpRequest)
