@@ -1,9 +1,12 @@
 import { SingUpController } from './sigup'
 import { type EmailValidator } from '../protocols'
 import { InvalidParamError, MissingParamError, ServerError } from '../errors'
+import { type AccountModel } from '../../domain/models/account'
+import { type AddAccount, type AddAccountModel } from '../../domain/usecases/add-account'
 
 interface SutTypes {
   emailValidatorStub: EmailValidator
+  addAccountStub: AddAccount
   sut: SingUpController
 }
 
@@ -16,11 +19,28 @@ const makeEmailValidatorStub = (): EmailValidator => {
   return new EmailValidatorStub()
 }
 
+const makeAddAccountStub = (): AddAccount => {
+  class AddAccountStub implements AddAccount {
+    add (account: AddAccountModel): AccountModel {
+      const fakeAccount = {
+        id: 'valid_id',
+        name: 'any_name',
+        email: 'any_email@mail.com',
+        password: 'any_password'
+      }
+      return fakeAccount
+    }
+  }
+  return new AddAccountStub()
+}
+
 const makeSut = (): SutTypes => {
   const emailValidatorStub = makeEmailValidatorStub()
-  const sut = new SingUpController(emailValidatorStub)
+  const addAccountStub = makeAddAccountStub()
+  const sut = new SingUpController(emailValidatorStub, addAccountStub)
   return {
     emailValidatorStub,
+    addAccountStub,
     sut
   }
 }
@@ -155,5 +175,27 @@ describe('SingUpController', () => {
 
     expect(response.statusCode).toEqual(500)
     expect(response.body).toEqual(new ServerError('error'))
+  })
+
+  test('Should call AddAccount with correct data ', () => {
+    const { sut, addAccountStub } = makeSut()
+    const isValidaSpy = jest.spyOn(addAccountStub, 'add')
+
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        email: 'any_email@mail.com',
+        password: 'any_password',
+        passwordConfirmation: 'any_password'
+      }
+    }
+
+    sut.handle(httpRequest)
+
+    expect(isValidaSpy).toHaveBeenCalledWith({
+      name: 'any_name',
+      email: 'any_email@mail.com',
+      password: 'any_password'
+    })
   })
 })
