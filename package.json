@@ -16,6 +16,7 @@
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "@types/node": "^20.14.12",
+    "@types/validator": "github:types/validator",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "eslint": "^8.57.0",
     "eslint-config-love": "^47.0.0",
@@ -36,5 +37,8 @@
   "type": "module",
   "engines": {
     "node": ">=18.18.0 <19 || >=20.9.0 <21 || >=21.1.0"
+  },
+  "dependencies": {
+    "validator": "^13.12.0"
   }
 }
