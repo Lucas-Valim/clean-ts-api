@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.14.12",
     "@types/validator": "github:types/validator",
@@ -39,6 +40,7 @@
     "node": ">=18.18.0 <19 || >=20.9.0 <21 || >=21.1.0"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "validator": "^13.12.0"
   }
 }
