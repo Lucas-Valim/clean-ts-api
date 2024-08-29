@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/main/server.ts",
-    "lint": "eslint --fix -c .js .",
+    "lint": "eslint src --fix",
     "build": "rimraf dist && tsc -p tsconfig-build.json",
     "test": "jest --passWithNoTests --watch --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --watch",

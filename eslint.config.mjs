@@ -8,7 +8,9 @@ export default [
     ignores: ['dist/', 'node_modules/'],
   },
   { files: ['**/*.{js,mjs,cjs,ts}'] },
+  // { files: ['src/**/*.{js,ts,jsx,tsx}', 'tests/**/*.{js,ts,jsx,tsx}'] },
   {
+    // files: ['**/*.js'],
     languageOptions: { globals: globals.browser },
     rules: {
       'prettier/prettier': ['error', { singleQuote: true }],
