@@ -50,7 +50,6 @@ export class SingUpController implements Controller {
         email,
         password,
       });
-
       return ok(account);
     } catch {
       return serverError();
