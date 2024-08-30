@@ -1,4 +1,4 @@
-import { SingUpController } from './sigup';
+import { SingUpController } from './signup';
 import { InvalidParamError, MissingParamError, ServerError } from '../errors';
 import {
   type AddAccount,
